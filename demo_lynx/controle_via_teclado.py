@@ -209,7 +209,7 @@ def kbevent(event):
 		print('Problema no envio do comando\nAbortando o programa...')
       #if the ascii value matches i 
     if event.Ascii == 105:
-	timesleep(1)
+	time.sleep(1)
 	t_4 += 77
 	try:
 		pos = braco.trava(4,t_4)
