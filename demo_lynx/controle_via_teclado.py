@@ -53,6 +53,13 @@ properties = [BAS_SERVO, BAS_MIN, BAS_MAX,
               GRI_SERVO, GRI_MIN, GRI_MAX]
 ##################################
 
+#posições iniciais
+t_0 = 1500
+t_1 = 1500
+t_2 = 1500
+t_3 = 1500
+t_4 = 1500 
+
 ##################################
 #######    PROGRAMA DEMO   #######
 ##################################
@@ -73,11 +80,28 @@ else:
     print('PROGRAMA DEMONSTRACAO INICIADO\n\n');
     print ('Porta serial /dev/ttyS0 aberta com sucesso\n')
 
+
+    print('\nPRIMEIRO COMANDO - POSICAL INICIAL\n')
+    try:
+        braco.envia_comando(HOME_POS)
+        print(' Envio de comando com teste de envio: %s \n' % (HOME_POS))
+    except:
+        print('Problema no envio do comando\nAbortando o programa...')
+
+
 # This function is called every time a key is presssed
 def kbevent(event):
+
+    #Definição de variáveis globais
+    global t_0
+    global t_1
+    global t_2
+    global t_3
+    global t_4
+
     global running
     # print key info
-    print(event)
+    #print(event)
 
     # If the ascii value matches spacebar, terminate the while loop
     if event.Ascii == 32:
@@ -86,13 +110,15 @@ def kbevent(event):
     # If the ascii value matches e, terminate the while loop
     if event.Ascii == 100:
 	time.sleep(1)
+	t_3 += 77
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(3,1300)
-		braco.envia_comando('#%dP%dT%d' % (3,1300,1500))
+		
+		pos = braco.trava(3,t_3)
+		braco.envia_comando('#%dP%dT%d' % (3,t_3 ,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#0P%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -100,51 +126,61 @@ def kbevent(event):
     # If the ascii value matches d, terminate the while loop
     if event.Ascii == 101:
 	time.sleep(1)
+	t_3 -=77
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(3,1700)
-		braco.envia_comando('#%dP%dT%d' % (3,1700,1500))
+		
+		pos = braco.trava(3,t_3)
+		braco.envia_comando('#%dP%dT%d' % (3,t_3,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#3%sT1500' % (pos)))
 	except:
-		print('Problema no envio do comando\nAbortando o programa...')
+		print('Problema no envwio do comando\nAbortando o programa...')
 
      # If the ascii value matches w, terminate the while loop
     if event.Ascii == 119:
 	time.sleep(1)
+	t_2 -= 77
+	
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(2,1300)
-		braco.envia_comando('#%dP%dT%d' % (2,1300,1500))
+		pos = braco.trava(t_2,1300)
+		braco.envia_comando('#%dP%dT%d' % (2,t_2,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
 	except:
+		#t_2 -= 500
 		print('Problema no envio do comando\nAbortando o programa...')
 
      # If the ascii value matches s, terminate the while loop
     if event.Ascii == 115:
 	time.sleep(1)
+	t_2 += 77
+	print("valor de t_2 = ",t_2)
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(2,1700)
-		braco.envia_comando('#%dP%dT%d' % (2,1700,1500))
+		
+		pos = braco.trava(2,t_2)
+		braco.envia_comando('#%dP%dT%d' % (2,t_2,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
 	except:
+		#t_2 +=500
 		print('Problema no envio do comando\nAbortando o programa...')
 
       # If the ascii value matches q
     if event.Ascii == 113:
 	time.sleep(1)
+	t_1 += 77
 	try:
- 		pos = braco.trava(1,1700)
-		braco.envia_comando('#%dP%dT%d' % (1,1700,1500))
+ 		pos = braco.trava(1,t_1)
+		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -153,45 +189,52 @@ def kbevent(event):
 	# if the ascii value matches a
     if event.Ascii == 97:
     	time.sleep(1)
+	t_1 -= 77
 	try:
- 		pos = braco.trava(1,1300)
-		braco.envia_comando('#%dP%dT%d' % (1,1300,1500))
+ 		pos = braco.trava(1,t_1)
+		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 
-        #if the ascii value matches 0
-    if event.Ascii == 48:
+        #if the ascii value matches o
+    if event.Ascii == 111:
         time.sleep(1)
+	t_4 -= 77
 	try:
-		pos = braco.trava(4,2400)
-		braco.envia_comando('#%dP%dT%d' % (1,2400,1500))
+		pos = braco.trava(4,t_4)
+		braco.envia_comando('#%dP%dT%d' % (4,t_4,1500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
-      #if the ascii value matches 1 
-    if event.Ascii == 49:
-	time.sleep(1)
+      #if the ascii value matches i 
+    if event.Ascii == 105:
+	timesleep(1)
+	t_4 += 77
 	try:
-		pos = braco.trava(4,2400)
-		braco.envia_comando('#%dP%dT%d' % (1,2400,1500))
+		pos = braco.trava(4,t_4)
+		braco.envia_comando('#%dP%dT%d' % (4,t_4,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
       
      #if the ascii value matches z
     if event.Ascii == 122:
+	
 	time.sleep(1)
+
+	t_0 += 77
 	try:
-		pos = braco.trava(0,1700)
-		braco.envia_comando('#%dP%dT%d' % (0,1700,1500))
+		pos = braco.trava(0,t_0)
+		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
      #if the ascii value c
     if event.Ascii == 99:
 	time.sleep(1)
+	t_0 -= 77
 	try:
-		pos = braco.trava(0,1300)
-		braco.envia_comando('#%dP%dT%d' % (0,1300,1500))
+		pos = braco.trava(0,t_0)
+		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 		
@@ -206,6 +249,7 @@ hookman.KeyDown = kbevent
 hookman.HookKeyboard()
 # Start our listener
 hookman.start()
+
 
 # Create a loop to keep the application running
 running = True
@@ -223,6 +267,5 @@ if(kbevent(a)):
 '''
 
 	
-
 
 
