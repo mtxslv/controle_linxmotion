@@ -144,6 +144,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#0P%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
  
     # If the ascii value matches d, MOVE THE wrist DOWN
     if event.Ascii == 100:
@@ -161,6 +162,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#3%sT1500' % (pos)))
 	except:
 		print('Problema no envwio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
      # If the ascii value matches w, move elbow up
     if event.Ascii == 119:
@@ -178,6 +180,7 @@ def kbevent(event):
 	except:
 		#t_2 -= 500
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
      # If the ascii value matches s, move elbow down
     if event.Ascii == 115:
@@ -197,6 +200,7 @@ def kbevent(event):
 	except:
 		#t_2 +=500
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
       # If the ascii value matches q, move shoulder up
     if event.Ascii == 113:
@@ -209,6 +213,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
 
 	# if the ascii value matches a, move shoulder down
@@ -222,6 +227,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
         #if the ascii value matches o, open claw
     if event.Ascii == 111:
@@ -233,6 +239,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 
       #if the ascii value matches i , close claw
     if event.Ascii == 105:
@@ -243,6 +250,7 @@ def kbevent(event):
 		braco.envia_comando('#%dP%dT%d' % (4,t_4,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
       
      #if the ascii value matches z, move body anti-clockwise
     if event.Ascii == 122:
@@ -256,6 +264,8 @@ def kbevent(event):
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
+
      #if the ascii value c, move body clockwise
     if event.Ascii == 99:
 	time.sleep(1)
@@ -266,6 +276,7 @@ def kbevent(event):
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	func_cd(q1,q2,q3,q4)
 		
 
 
