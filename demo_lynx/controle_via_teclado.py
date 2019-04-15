@@ -66,6 +66,10 @@ t_4 = 1500
 
 #POSICAO INICIAL PARA TODOS OS SERVOS
 HOME_POS = '#0P1500#1P1500#2P1500#3P1500#4P1500T1500'
+q1 = 0.0
+q2 = 0.0
+q3 = 0.0
+q4 = 0.0
 
 #INICIALIZACAO DO BRACO PASSANDO AS PROPRIEDADES COMO PARAMETRO
 braco = RoboticArmAL5D(properties)
@@ -92,12 +96,17 @@ else:
 # This function is called every time a key is presssed
 def kbevent(event):
 
-    #Definição de variáveis globais
+    #estamos usando as variáveis lá de cima (globais)
     global t_0
     global t_1
     global t_2
     global t_3
     global t_4
+
+    global q1
+    global q2
+    global q3
+    global q4
 
     global running
 
@@ -110,6 +119,7 @@ def kbevent(event):
     if event.Ascii == 101:
 	time.sleep(1)
 	t_3 += 11
+	q4 += 1
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -126,6 +136,7 @@ def kbevent(event):
     if event.Ascii == 100:
 	time.sleep(1)
 	t_3 -=11
+	q4 -= 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -142,7 +153,7 @@ def kbevent(event):
     if event.Ascii == 119:
 	time.sleep(1)
 	t_2 -= 11
-	
+	q3 += 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -159,6 +170,7 @@ def kbevent(event):
     if event.Ascii == 115:
 	time.sleep(1)
 	t_2 += 11
+	q3 -= 1.0
 	print("valor de t_2 = ",t_2)
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
@@ -177,6 +189,7 @@ def kbevent(event):
     if event.Ascii == 113:
 	time.sleep(1)
 	t_1 += 11
+	q2 +=1.0
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
@@ -189,6 +202,7 @@ def kbevent(event):
     if event.Ascii == 97:
     	time.sleep(1)
 	t_1 -= 11
+	q2 -= 1.0
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
@@ -206,6 +220,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+
       #if the ascii value matches i , close claw
     if event.Ascii == 105:
 	time.sleep(1)
@@ -222,6 +237,7 @@ def kbevent(event):
 	time.sleep(1)
 
 	t_0 += 11
+	q1 -= 1
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
@@ -231,6 +247,7 @@ def kbevent(event):
     if event.Ascii == 99:
 	time.sleep(1)
 	t_0 -= 11
+	q1 += 1
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
