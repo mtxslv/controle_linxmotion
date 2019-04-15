@@ -9,6 +9,7 @@ Created on Mon Apr 08 09:12:00 2019
 from ufrn_al5d import RoboticArmAL5D
 import time
 import pyxhook
+import math
 
 
 ###################################
@@ -92,6 +93,18 @@ else:
     except:
         print('Problema no envio do comando\nAbortando o programa...')
 
+#Direct Cynematics function
+def func_cd(v1,v2,v3,v4):
+    '''
+	input: joint variables
+	return: nothing, so far. Later, it gonna be list of lists (position and orientation)
+    '''
+   cd = list()
+   cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v2+v3+v4)], math.cos(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))]
+	 [math.sin(v1)*math.cos(v2+v3+v4),-math.cos(v1),math.sin(v1)*math.sin(v2+v3+v4),math.sin(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))],
+	 [math.sin(v2+v3+v4),0,-math.cos(v2+v3+v4),186*math.sin(v2+v3)-57*math.cos(v2+v3+v4)+145*math.sin(v2)+73],
+	 [0,0,0,1]]
+    print cd
 
 # This function is called every time a key is presssed
 def kbevent(event):
@@ -119,7 +132,7 @@ def kbevent(event):
     if event.Ascii == 101:
 	time.sleep(1)
 	t_3 += 11
-	q4 += 1
+	q4 += 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -237,7 +250,7 @@ def kbevent(event):
 	time.sleep(1)
 
 	t_0 += 11
-	q1 -= 1
+	q1 -= 1.0
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
@@ -247,7 +260,7 @@ def kbevent(event):
     if event.Ascii == 99:
 	time.sleep(1)
 	t_0 -= 11
-	q1 += 1
+	q1 += 1.0
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
