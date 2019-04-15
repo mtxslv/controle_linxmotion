@@ -109,7 +109,7 @@ def kbevent(event):
     # If the ascii value matches e, move the wrist up
     if event.Ascii == 101:
 	time.sleep(1)
-	t_3 += 144
+	t_3 += 11
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -125,7 +125,7 @@ def kbevent(event):
     # If the ascii value matches d, MOVE THE wrist DOWN
     if event.Ascii == 100:
 	time.sleep(1)
-	t_3 -=77
+	t_3 -=11
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -141,7 +141,7 @@ def kbevent(event):
      # If the ascii value matches w, move elbow up
     if event.Ascii == 119:
 	time.sleep(1)
-	t_2 -= 77
+	t_2 -= 11
 	
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
@@ -158,7 +158,7 @@ def kbevent(event):
      # If the ascii value matches s, move elbow down
     if event.Ascii == 115:
 	time.sleep(1)
-	t_2 += 77
+	t_2 += 11
 	print("valor de t_2 = ",t_2)
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
@@ -176,7 +176,7 @@ def kbevent(event):
       # If the ascii value matches q, move shoulder up
     if event.Ascii == 113:
 	time.sleep(1)
-	t_1 += 77
+	t_1 += 11
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
@@ -188,7 +188,7 @@ def kbevent(event):
 	# if the ascii value matches a, move shoulder down
     if event.Ascii == 97:
     	time.sleep(1)
-	t_1 -= 77
+	t_1 -= 11
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
@@ -221,7 +221,7 @@ def kbevent(event):
 	
 	time.sleep(1)
 
-	t_0 += 77
+	t_0 += 11
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
@@ -230,7 +230,7 @@ def kbevent(event):
      #if the ascii value c, move body clockwise
     if event.Ascii == 99:
 	time.sleep(1)
-	t_0 -= 77
+	t_0 -= 11
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
