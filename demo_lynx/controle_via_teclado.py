@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Apr 08 09:12:00 2019
-
 @author: Assis,Arthur,Isaac and Iago based on the file made for jean mario m lima
 """
 
@@ -99,12 +98,10 @@ def func_cd(v1,v2,v3,v4):
 	input: joint variables
 	return: nothing, so far. Later, it gonna be list of lists (position and orientation)
     '''
-   cd = list()
-   cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v2+v3+v4)], math.cos(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))]
-	 [math.sin(v1)*math.cos(v2+v3+v4),-math.cos(v1),math.sin(v1)*math.sin(v2+v3+v4),math.sin(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))],
-	 [math.sin(v2+v3+v4),0,-math.cos(v2+v3+v4),186*math.sin(v2+v3)-57*math.cos(v2+v3+v4)+145*math.sin(v2)+73],
-	 [0,0,0,1]]
+    cd = list()
+    cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v2+v3+v4), math.cos(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))], [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))], [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 186*math.sin(v2+v3)-57*math.cos(v2+v3+v4)+145*math.sin(v2)+73], [0, 0, 0, 1]]
     print cd
+    return;
 
 # This function is called every time a key is presssed
 def kbevent(event):
@@ -130,9 +127,8 @@ def kbevent(event):
 
     # If the ascii value matches e, move the wrist up
     if event.Ascii == 101:
-	time.sleep(1)
-	t_3 += 11
-	q4 += 1.0
+	t_3 += 22
+	q4 += 2.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -140,7 +136,7 @@ def kbevent(event):
 		#ANTERIORMENTE ESTABELECIDOS
 		
 		pos = braco.trava(3,t_3)
-		braco.envia_comando('#%dP%dT%d' % (3,t_3 ,1500))
+		braco.envia_comando('#%dP%dT%d' % (3,t_3 ,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#0P%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -148,9 +144,8 @@ def kbevent(event):
  
     # If the ascii value matches d, MOVE THE wrist DOWN
     if event.Ascii == 100:
-	time.sleep(1)
-	t_3 -=11
-	q4 -= 1.0
+	t_3 -=22
+	q4 -= 2.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -158,7 +153,7 @@ def kbevent(event):
 		#ANTERIORMENTE ESTABELECIDOS
 		
 		pos = braco.trava(3,t_3)
-		braco.envia_comando('#%dP%dT%d' % (3,t_3,1500))
+		braco.envia_comando('#%dP%dT%d' % (3,t_3,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#3%sT1500' % (pos)))
 	except:
 		print('Problema no envwio do comando\nAbortando o programa...')
@@ -166,16 +161,15 @@ def kbevent(event):
 
      # If the ascii value matches w, move elbow up
     if event.Ascii == 119:
-	time.sleep(1)
-	t_2 -= 11
-	q3 += 1.0
+	t_2 -= 22
+	q3 += 2.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
 		pos = braco.trava(t_2,1300)
-		braco.envia_comando('#%dP%dT%d' % (2,t_2,1500))
+		braco.envia_comando('#%dP%dT%d' % (2,t_2,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
 	except:
 		#t_2 -= 500
@@ -184,9 +178,8 @@ def kbevent(event):
 
      # If the ascii value matches s, move elbow down
     if event.Ascii == 115:
-	time.sleep(1)
-	t_2 += 11
-	q3 -= 1.0
+	t_2 += 22
+	q3 -= 2.0
 	print("valor de t_2 = ",t_2)
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
@@ -195,7 +188,7 @@ def kbevent(event):
 		#ANTERIORMENTE ESTABELECIDOS
 		
 		pos = braco.trava(2,t_2)
-		braco.envia_comando('#%dP%dT%d' % (2,t_2,1500))
+		braco.envia_comando('#%dP%dT%d' % (2,t_2,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
 	except:
 		#t_2 +=500
@@ -204,12 +197,11 @@ def kbevent(event):
 
       # If the ascii value matches q, move shoulder up
     if event.Ascii == 113:
-	time.sleep(1)
-	t_1 += 11
-	q2 +=1.0
+	t_1 += 22
+	q2 +=2.0
 	try:
  		pos = braco.trava(1,t_1)
-		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
+		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -218,12 +210,11 @@ def kbevent(event):
 
 	# if the ascii value matches a, move shoulder down
     if event.Ascii == 97:
-    	time.sleep(1)
-	t_1 -= 11
-	q2 -= 1.0
+	t_1 -= 22
+	q2 -= 2.0
 	try:
  		pos = braco.trava(1,t_1)
-		braco.envia_comando('#%dP%dT%d' % (1,t_1,1500))
+		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -231,11 +222,10 @@ def kbevent(event):
 
         #if the ascii value matches o, open claw
     if event.Ascii == 111:
-        time.sleep(1)
 	t_4 -= 77
 	try:
 		pos = braco.trava(4,t_4)
-		braco.envia_comando('#%dP%dT%d' % (4,t_4,1500))
+		braco.envia_comando('#%dP%dT%d' % (4,t_4,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
@@ -243,37 +233,32 @@ def kbevent(event):
 
       #if the ascii value matches i , close claw
     if event.Ascii == 105:
-	time.sleep(1)
 	t_4 += 77
 	try:
 		pos = braco.trava(4,t_4)
-		braco.envia_comando('#%dP%dT%d' % (4,t_4,1500))
+		braco.envia_comando('#%dP%dT%d' % (4,t_4,500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 	func_cd(q1,q2,q3,q4)
       
      #if the ascii value matches z, move body anti-clockwise
     if event.Ascii == 122:
-	
-	time.sleep(1)
-
-	t_0 += 11
-	q1 -= 1.0
+	t_0 += 22
+	q1 -= 2.0
 	try:
 		pos = braco.trava(0,t_0)
-		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
+		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 	func_cd(q1,q2,q3,q4)
 
      #if the ascii value c, move body clockwise
     if event.Ascii == 99:
-	time.sleep(1)
-	t_0 -= 11
-	q1 += 1.0
+	t_0 -= 22
+	q1 += 2.0
 	try:
 		pos = braco.trava(0,t_0)
-		braco.envia_comando('#%dP%dT%d' % (0,t_0,1500))
+		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 	func_cd(q1,q2,q3,q4)
@@ -294,7 +279,7 @@ hookman.start()
 # Create a loop to keep the application running
 running = True
 while running:
-    time.sleep(0.1)
+    time.sleep(0.5)
 
 # Close the listener when we are done
 hookman.cancel()
@@ -305,7 +290,5 @@ print("ainda tem mais alguycjkflkgjdsfjlgdsjkfghdsjfgkfslds")
 #testando cliques no teclado:
 if(kbevent(a)):
 '''
-
-	
 
 
