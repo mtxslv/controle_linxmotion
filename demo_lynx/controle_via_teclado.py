@@ -57,7 +57,7 @@ properties = [BAS_SERVO, BAS_MIN, BAS_MAX,
 t_0 = 1500
 t_1 = 1500
 t_2 = 1500
-t_3 = 1500
+t_3 = 600
 t_4 = 1500 
 
 ##################################
@@ -65,7 +65,7 @@ t_4 = 1500
 ##################################
 
 #POSICAO INICIAL PARA TODOS OS SERVOS
-HOME_POS = '#0P1500#1P1500#2P1500#3P1500#4P1500T1500'
+HOME_POS = '#0P1500#1P1500#2P1500#3P600#4P1500T1500'
 q1 = 0.0
 q2 = 0.0
 q3 = 0.0
@@ -99,7 +99,10 @@ def func_cd(v1,v2,v3,v4):
 	return: nothing, so far. Later, it gonna be list of lists (position and orientation)
     '''
     cd = list()
-    cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v2+v3+v4), math.cos(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))], [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*((145*math.cos(v2))+(186*math.cos(v2-v3))+57*math.sin(v2+v3+v4))], [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 186*math.sin(v2+v3)-57*math.cos(v2+v3+v4)+145*math.sin(v2)+73], [0, 0, 0, 1]]
+    cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v1)*math.sin(v2+v3+v4), math.cos(v1)*(57*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145)) ],
+	  [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*(57*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
+	  [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 73-57*math.cos(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
+	  [0, 0, 0, 1]]
     print cd
     return;
 
