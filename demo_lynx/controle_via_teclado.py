@@ -130,8 +130,8 @@ def kbevent(event):
 
     # If the ascii value matches e, move the wrist up
     if event.Ascii == 101:
-	t_3 += 22
-	q4 += 2.0
+	t_3 += 11
+	q4 += 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -147,8 +147,8 @@ def kbevent(event):
  
     # If the ascii value matches d, MOVE THE wrist DOWN
     if event.Ascii == 100:
-	t_3 -=22
-	q4 -= 2.0
+	t_3 -=11
+	q4 -= 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -164,8 +164,8 @@ def kbevent(event):
 
      # If the ascii value matches w, move elbow up
     if event.Ascii == 119:
-	t_2 -= 22
-	q3 += 2.0
+	t_2 -= 11
+	q3 += 1.0
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
@@ -181,8 +181,8 @@ def kbevent(event):
 
      # If the ascii value matches s, move elbow down
     if event.Ascii == 115:
-	t_2 += 22
-	q3 -= 2.0
+	t_2 += 11
+	q3 -= 1.0
 	print("valor de t_2 = ",t_2)
 	try:
 		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
@@ -200,8 +200,8 @@ def kbevent(event):
 
       # If the ascii value matches q, move shoulder up
     if event.Ascii == 113:
-	t_1 += 22
-	q2 +=2.0
+	t_1 += 11
+	q2 +=1.0
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
@@ -213,8 +213,8 @@ def kbevent(event):
 
 	# if the ascii value matches a, move shoulder down
     if event.Ascii == 97:
-	t_1 -= 22
-	q2 -= 2.0
+	t_1 -= 11
+	q2 -= 1.0
 	try:
  		pos = braco.trava(1,t_1)
 		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
@@ -246,8 +246,8 @@ def kbevent(event):
       
      #if the ascii value matches z, move body anti-clockwise
     if event.Ascii == 122:
-	t_0 += 22
-	q1 -= 2.0
+	t_0 += 11
+	q1 -= 1.0
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
@@ -257,8 +257,8 @@ def kbevent(event):
 
      #if the ascii value c, move body clockwise
     if event.Ascii == 99:
-	t_0 -= 22
-	q1 += 2.0
+	t_0 -= 11
+	q1 += 1.0
 	try:
 		pos = braco.trava(0,t_0)
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
