@@ -99,9 +99,9 @@ def func_cd(v1,v2,v3,v4):
 	return: nothing, so far. Later, it gonna be list of lists (position and orientation)
     '''
     cd = list()
-    cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v1)*math.sin(v2+v3+v4), math.cos(v1)*(57*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145)) ],
-	  [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*(57*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
-	  [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 73-57*math.cos(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
+    cd = [[math.cos(v1)*math.cos(v2+v3+v4), -math.sin(v1), math.cos(v1)*math.sin(v2+v3+v4), math.cos(v1)*(87*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145)) ],
+	  [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*(87*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
+	  [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 73-87*math.cos(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
 	  [0, 0, 0, 1]]
     print cd
     return;
