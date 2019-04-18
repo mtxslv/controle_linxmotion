@@ -92,18 +92,26 @@ else:
     except:
         print('Problema no envio do comando\nAbortando o programa...')
 
+
 #Direct Cynematics function
-def func_cd(v1,v2,v3,v4):
+def new_func_cd(v1a,v2a,v3a,v4a):
     '''
-	input: joint variables
-	return: nothing, so far. Later, it gonna be list of lists (position and orientation)
+	   input: joint variables
+	   return: nothing, so far. Later, it gonna be list of lists (position and orientation)
     '''
+    # Inputs in angles is turned to radians.
+    v1 = v1a*math.pi/180
+    v2 = v2a*math.pi/180
+    v3 = v3a*math.pi/180
+    v4 = v4a*math.pi/180
     cd = list()
-    cd = [[math.cos(v1)*math.cos(v2+v3+v4), math.sin(v1), math.cos(v1)*math.sin(v2+v3+v4), math.cos(v1)*(87*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145)) ],
-	  [math.sin(v1)*math.cos(v2+v3+v4), -math.cos(v1), math.sin(v1)*math.sin(v2+v3+v4), math.sin(v1)*(87*math.sin(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
-	  [math.sin(v2+v3+v4), 0,-math.cos(v2+v3+v4), 73-87*math.cos(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
-	  [0, 0, 0, 1]]
-    print cd
+    cd = [
+        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(87*math.cos(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))],
+        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(87*math.cos(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
+        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, 73+87*math.sin(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
+        [0, 0, 0, 1]
+    ]
+    print (cd)
     return;
 
 # This function is called every time a key is presssed
