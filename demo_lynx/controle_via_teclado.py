@@ -106,9 +106,9 @@ def new_func_cd(v1a,v2a,v3a,v4a):
     v4 = v4a*math.pi/180
     cd = list()
     cd = [
-        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(87*math.cos(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))],
-        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(87*math.cos(v2+v3+v4)+math.cos(v2)*(186*math.cos(v3)+145))], 
-        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, 73+87*math.sin(v2+v3+v4)+math.sin(v2)*(186*math.cos(v3)+145)], 
+        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(87*math.cos(v2+v3+v4)+186*math.cos(v2+v3)+145*math.cos(v2))],
+        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(87*math.cos(v2+v3+v4)+186*math.cos(v2+v3)+145*math.cos(v2))], 
+        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, 73+87*math.sin(v2+v3+v4)+186*math.sin(v2+v3)+145*math.sin(v2)], 
         [0, 0, 0, 1]
     ]
     print (cd)
