@@ -67,9 +67,9 @@ t_4 = 1500
 #POSICAO INICIAL PARA TODOS OS SERVOS
 HOME_POS = '#0P1500#1P1500#2P1500#3P600#4P1500T1500'
 q1 = 0.0
-q2 = 0.0
-q3 = 0.0
-q4 = 0.0
+q2 = 90.0
+q3 = -90.0
+q4 = -90.0
 
 #INICIALIZACAO DO BRACO PASSANDO AS PROPRIEDADES COMO PARAMETRO
 braco = RoboticArmAL5D(properties)
@@ -94,7 +94,7 @@ else:
 
 
 #Direct Cynematics function
-def new_func_cd(v1a,v2a,v3a,v4a):
+def func_cd(v1a,v2a,v3a,v4a):
     '''
 	   input: joint variables
 	   return: nothing, so far. Later, it gonna be list of lists (position and orientation)
