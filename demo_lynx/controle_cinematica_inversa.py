@@ -123,7 +123,7 @@ def func_cd(v1a,v2a,v3a,v4a):
 def func_ic(x,y,z,phi):
     '''
 	   input: position and angle
-	   output: TODO
+	   output: Tuple containing angular positions
     '''
     theta_1 = math.atan2(y/math.sqrt(y*y+x*x),x/math.sqrt(y*y+x*x))
     R1 = math.sqrt(math.pow(z-L4*math.sin(phi)-L1,2)+math.pow(x-L4*math.cos(phi),2))
