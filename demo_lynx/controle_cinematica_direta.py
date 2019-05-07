@@ -300,7 +300,7 @@ while running:
 # Close the listener when we are done
 hookman.cancel()
 
-print("ainda tem mais alguycjkflkgjdsfjlgdsjkfghdsjfgkfslds")
+print("FIM DO PROGRAMA")
 
 '''
 #testando cliques no teclado:
