@@ -52,7 +52,12 @@ properties = [BAS_SERVO, BAS_MIN, BAS_MAX,
               WRI_SERVO, WRI_MIN, WRI_MAX,
               GRI_SERVO, GRI_MIN, GRI_MAX]
 ##################################
-
+#comprimentos de elo
+L1 = 28+45
+L2 = 145
+L3 = 186
+L4 = 87
+##################################
 #posições iniciais
 t_0 = 1500
 t_1 = 1500
@@ -106,9 +111,9 @@ def func_cd(v1a,v2a,v3a,v4a):
     v4 = v4a*math.pi/180
     cd = list()
     cd = [
-        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(87*math.cos(v2+v3+v4)+186*math.cos(v2+v3)+145*math.cos(v2))],
-        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(87*math.cos(v2+v3+v4)+186*math.cos(v2+v3)+145*math.cos(v2))], 
-        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, 73+87*math.sin(v2+v3+v4)+186*math.sin(v2+v3)+145*math.sin(v2)], 
+        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(L4*math.cos(v2+v3+v4)+L3*math.cos(v2+v3)+L2*math.cos(v2))],
+        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(L4*math.cos(v2+v3+v4)+L3*math.cos(v2+v3)+L2*math.cos(v2))], 
+        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, L1+L4*math.sin(v2+v3+v4)+L3*math.sin(v2+v3)+L2*math.sin(v2)], 
         [0, 0, 0, 1]
     ]
     print (cd)
