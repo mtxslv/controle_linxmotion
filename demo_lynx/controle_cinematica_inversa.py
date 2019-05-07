@@ -184,7 +184,7 @@ def kbevent(event):
 		#O SERVO E O VALOR DA POSICAO DESEJADA E
 		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
 		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(t_2,1300)
+		pos = braco.trava(2,t_2)
 		braco.envia_comando('#%dP%dT%d' % (2,t_2,500))
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
 	except:
