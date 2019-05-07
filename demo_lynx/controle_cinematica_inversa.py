@@ -119,6 +119,21 @@ def func_cd(v1a,v2a,v3a,v4a):
     print (cd)
     return;
 
+#Inverse Cynematics function
+def func_ic(x,y,z,phi):
+    '''
+	   input: position and angle
+	   output: TODO
+    '''
+    theta_1 = math.atan2(y/math.sqrt(y*y+x*x),x/math.sqrt(y*y+x*x))
+    R1 = math.sqrt(math.pow(z-L4*math.sin(phi)-L1,2)+math.pow(x-L4*math.cos(phi),2))
+    cos_a1 = (L2*L2+R1*R1-L3*L3)/(2*L2*R1)
+    theta_3 = math.atan2(math.sqrt(1-(cos_a1*cos_a1)),cos_a1)
+    theta_2 = math.atan2(z-L4*math.sin(phi)-L1,x-L4*math.cos(phi))-theta_3
+    theta_4 = phi-theta_2-theta_3
+    return theta_1,theta_2,theta_3,theta_4
+
+
 # This function is called every time a key is presssed
 def kbevent(event):
 
@@ -300,7 +315,7 @@ while running:
 # Close the listener when we are done
 hookman.cancel()
 
-print("ainda tem mais alguycjkflkgjdsfjlgdsjkfghdsjfgkfslds")
+print("FIM DO PROGRAMA")
 
 '''
 #testando cliques no teclado:
