@@ -104,7 +104,7 @@ def func_cd(v1a,v2a,v3a,v4a):
 	   input: joint variables
 	   return: nothing, so far. Later, it gonna be list of lists (position and orientation)
     '''
-    # Inputs in angles is turned to radians.
+    # Inputs in degrees is turned to radians.
     v1 = v1a*math.pi/180
     v2 = v2a*math.pi/180
     v3 = v3a*math.pi/180
@@ -123,12 +123,12 @@ def func_cd(v1a,v2a,v3a,v4a):
 def func_ic(x,y,z,phi):
     '''
 	   input: position and angle
-	   output: Tuple containing angular positions
+	   output: Tuple containing angular positions, in radians
     '''
-    theta_1 = math.atan2(y/math.sqrt(y*y+x*x),x/math.sqrt(y*y+x*x)) # check this relation later
+    theta_1 = math.atan2(y,x) # relation just valid for math.sqrt(y*y+x*x) != 0
     R1 = math.sqrt(math.pow(z-L4*math.sin(phi)-L1,2)+math.pow(x-L4*math.cos(phi),2))
-    cos_a1 = (L2*L2+R1*R1-L3*L3)/(2*L2*R1)
-    theta_3 = math.atan2(math.sqrt(1-(cos_a1*cos_a1)),cos_a1) # check this relation later
+    cos_a1 = (L2*L2+R1*R1-L3*L3)/(2*L2*R1) # a1 = math.atan2( math.sqrt( 1-cos_a1*cos_a1) , cos_a1 )
+    theta_3 = math.pi/2 + math.atan2( math.sqrt( 1-cos_a1*cos_a1) , cos_a1 ) - math.atan2( math.sqrt(1- (L2*cos_a1/L3)*(L2*cos_a1/L3)) , L2*cos_a1/L3 ) 
     theta_2 = math.atan2(z-L4*math.sin(phi)-L1,x-L4*math.cos(phi))-theta_3
     theta_4 = phi-theta_2-theta_3
     return theta_1,theta_2,theta_3,theta_4
