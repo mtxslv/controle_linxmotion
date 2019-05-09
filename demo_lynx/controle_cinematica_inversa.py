@@ -137,13 +137,14 @@ def func_ic(x,y,z,phi):
 # This function is called every time a key is presssed
 def kbevent(event):
 
-    #estamos usando as variáveis lá de cima (globais)
+    #global positions (in pulse units, I guess)
     global t_0
     global t_1
     global t_2
     global t_3
     global t_4
 
+    #global joint variables
     global q1
     global q2
     global q3
@@ -151,6 +152,11 @@ def kbevent(event):
 
     global running
 
+    #local inverse cynematics variables
+    x = 0
+    y = 0
+    z = 0
+    phi = 0
 
     # If the ascii value matches spacebar, terminate the while loop
     if event.Ascii == 32:
@@ -173,126 +179,7 @@ def kbevent(event):
 		print('Problema no envio do comando\nAbortando o programa...')
 	func_cd(q1,q2,q3,q4)
  
-    # If the ascii value matches d, MOVE THE wrist DOWN
-    if event.Ascii == 100:
-	t_3 -=11
-	q4 -= 1.0
-	try:
-		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
-		#O SERVO E O VALOR DA POSICAO DESEJADA E
-		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
-		#ANTERIORMENTE ESTABELECIDOS
-		
-		pos = braco.trava(3,t_3)
-		braco.envia_comando('#%dP%dT%d' % (3,t_3,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#3%sT1500' % (pos)))
-	except:
-		print('Problema no envwio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-     # If the ascii value matches w, move elbow up
-    if event.Ascii == 119:
-	t_2 -= 11
-	q3 += 1.0
-	try:
-		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
-		#O SERVO E O VALOR DA POSICAO DESEJADA E
-		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
-		#ANTERIORMENTE ESTABELECIDOS
-		pos = braco.trava(2,t_2)
-		braco.envia_comando('#%dP%dT%d' % (2,t_2,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
-	except:
-		#t_2 -= 500
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-     # If the ascii value matches s, move elbow down
-    if event.Ascii == 115:
-	t_2 += 11
-	q3 -= 1.0
-	print("valor de t_2 = ",t_2)
-	try:
-		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
-		#O SERVO E O VALOR DA POSICAO DESEJADA E
-		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
-		#ANTERIORMENTE ESTABELECIDOS
-		
-		pos = braco.trava(2,t_2)
-		braco.envia_comando('#%dP%dT%d' % (2,t_2,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#2%sT1500' % (pos)))
-	except:
-		#t_2 +=500
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-      # If the ascii value matches q, move shoulder up
-    if event.Ascii == 113:
-	t_1 += 11
-	q2 +=1.0
-	try:
- 		pos = braco.trava(1,t_1)
-		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-
-	# if the ascii value matches a, move shoulder down
-    if event.Ascii == 97:
-	t_1 -= 11
-	q2 -= 1.0
-	try:
- 		pos = braco.trava(1,t_1)
-		braco.envia_comando('#%dP%dT%d' % (1,t_1,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-        #if the ascii value matches o, open claw
-    if event.Ascii == 111:
-	t_4 -= 77
-	try:
-		pos = braco.trava(4,t_4)
-		braco.envia_comando('#%dP%dT%d' % (4,t_4,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-      #if the ascii value matches i , close claw
-    if event.Ascii == 105:
-	t_4 += 77
-	try:
-		pos = braco.trava(4,t_4)
-		braco.envia_comando('#%dP%dT%d' % (4,t_4,500))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-      
-     #if the ascii value matches z, move body anti-clockwise
-    if event.Ascii == 122:
-	t_0 += 11
-	q1 -= 1.0
-	try:
-		pos = braco.trava(0,t_0)
-		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
-
-     #if the ascii value c, move body clockwise
-    if event.Ascii == 99:
-	t_0 -= 11
-	q1 += 1.0
-	try:
-		pos = braco.trava(0,t_0)
-		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
+    
 		
 
 
@@ -317,9 +204,6 @@ hookman.cancel()
 
 print("FIM DO PROGRAMA")
 
-'''
-#testando cliques no teclado:
-if(kbevent(a)):
-'''
+
 
 
