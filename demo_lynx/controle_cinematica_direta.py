@@ -303,9 +303,6 @@ hookman.cancel()
 
 print("FIM DO PROGRAMA")
 
-'''
-#testando cliques no teclado:
-if(kbevent(a)):
-'''
+
 
 
