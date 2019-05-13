@@ -253,6 +253,7 @@ def kbevent(event):
 	try:
 		pos = braco.trava(4,t_4)
 		braco.envia_comando('#%dP%dT%d' % (4,t_4,500))
+		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
 	func_cd(q1,q2,q3,q4)
