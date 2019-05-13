@@ -65,9 +65,6 @@ t_2 = 1500
 t_3 = 600
 t_4 = 1500 
 
-##################################
-#######    PROGRAMA DEMO   #######
-##################################
 
 #POSICAO INICIAL PARA TODOS OS SERVOS
 HOME_POS = '#0P1500#1P1500#2P1500#3P600#4P1500T1500'
@@ -98,27 +95,6 @@ else:
         print('Problema no envio do comando\nAbortando o programa...')
 
 
-#Direct Cynematics function
-def func_cd(v1a,v2a,v3a,v4a):
-    '''
-	   input: joint variables
-	   return: nothing, so far. Later, it gonna be list of lists (position and orientation)
-    '''
-    # Inputs in degrees is turned to radians.
-    v1 = v1a*math.pi/180
-    v2 = v2a*math.pi/180
-    v3 = v3a*math.pi/180
-    v4 = v4a*math.pi/180
-    cd = list()
-    cd = [
-        [math.cos(v1)*math.cos(v2+v3+v4), -math.cos(v1)*math.sin(v2+v3+v4), math.sin(v1), math.cos(v1)*(L4*math.cos(v2+v3+v4)+L3*math.cos(v2+v3)+L2*math.cos(v2))],
-        [math.sin(v1)*math.cos(v2+v3+v4), -math.sin(v1)*math.sin(v2+v3+v4), -math.cos(v1),  math.sin(v1)*(L4*math.cos(v2+v3+v4)+L3*math.cos(v2+v3)+L2*math.cos(v2))], 
-        [math.sin(v2+v3+v4), math.cos(v2+v3+v4),0, L1+L4*math.sin(v2+v3+v4)+L3*math.sin(v2+v3)+L2*math.sin(v2)], 
-        [0, 0, 0, 1]
-    ]
-    print (cd)
-    return;
-
 #Inverse Cynematics function
 def func_ic(x,y,z,phi):
     '''
@@ -134,71 +110,68 @@ def func_ic(x,y,z,phi):
     return theta_1,theta_2,theta_3,theta_4
 
 
+def show_clue():
+    print('Waiting instructions...')
+    print('Available commands: \n o - ABRE_GARRA() \n c - FECHA_GARRA() \n m - MOVE(X,Y,Z) \n r - REPOUSO()')
+
+
+def ABRE_GARRA():
+    print('abrindo garra...')
+    try:
+        pos = braco.trava(4,1400) # pretty open claw
+	braco.envia_comando('#%dP%dT%d' % (4,1400,500))
+        print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
+
+def FECHA_GARRA():
+    print('fechando garra...')
+    try:
+	pos = braco.trava(4,2200) # pretty close claw
+        braco.envia_comando('#%dP%dT%d' % (4,2200,500))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
+
+def MOVE(x,y,z):
+    print('nao esta movendo ainda')
+
+def REPOUSO():
+    print('\n INDO PARA POSICAO DE REPOUSO... \n')
+    try:
+        braco.envia_comando(HOME_POS)
+        print(' Envio de comando com teste de envio: %s \n' % (HOME_POS))
+    except:
+        print('Problema no envio do comando\nAbortando o programa...')
+
 # This function is called every time a key is presssed
-def kbevent(event):
-
-    #global positions (in pulse units, I guess)
-    global t_0
-    global t_1
-    global t_2
-    global t_3
-    global t_4
-
-    #global joint variables
-    global q1
-    global q2
-    global q3
-    global q4
-
-    global running
-
-    #local inverse cynematics variables
-    x = 0
-    y = 0
-    z = 0
-    phi = 0
-
+def kbevent(event, params):
+    #if the ascii value matches o, open claw
+    if event.Ascii == 111:
+        ABRE_GARRA()
+    #if the ascii value matches i, close claw 
+    if event.Ascii == 105:
+        FECHA_GARRA()
+    # print key info
+    print(event)
     # If the ascii value matches spacebar, terminate the while loop
     if event.Ascii == 32:
-	running = False
+        params['running'] = False
 
-    # If the ascii value matches e, move the wrist up
-    if event.Ascii == 101:
-	t_3 += 11
-	q4 += 1.0
-	try:
-		#FUNCAO TRAVA (trava) RECEBE COMO PARAMETROS
-		#O SERVO E O VALOR DA POSICAO DESEJADA E
-		#RETORNA A POSICAO CORRIGIDA DE ACORDO COM OS LIMITES MAX E MIN
-		#ANTERIORMENTE ESTABELECIDOS
-		
-		pos = braco.trava(3,t_3)
-		braco.envia_comando('#%dP%dT%d' % (3,t_3 ,500))
-		print('Envio de comando com teste de envio e de travas: %s \n' % ('#0P%sT1500' % (pos)))
-	except:
-		print('Problema no envio do comando\nAbortando o programa...')
-	func_cd(q1,q2,q3,q4)
- 
-    
-		
-
-
-
+parameters={'running':True}
 # Create hookmanager
-hookman = pyxhook.HookManager()
+hookman = pyxhook.HookManager(parameters=True)
 # Define our callback to fire when a key is pressed down
 hookman.KeyDown = kbevent
+# Define our parameters for callback function
+hookman.KeyDownParameters = parameters
 # Hook the keyboard
 hookman.HookKeyboard()
 # Start our listener
 hookman.start()
 
-
 # Create a loop to keep the application running
-running = True
-while running:
-    time.sleep(0.5)
-
+while parameters['running']:
+    time.sleep(0.1)
 # Close the listener when we are done
 hookman.cancel()
 
