@@ -95,6 +95,10 @@ else:
         print('Problema no envio do comando\nAbortando o programa...')
 
 
+###############################
+######## NEW FUNCTIONS ########
+###############################
+
 #Inverse Cynematics function
 def func_ic(x,y,z,phi):
     '''
@@ -133,7 +137,8 @@ def FECHA_GARRA():
 	print('Problema no envio do comando\nAbortando o programa...')
 
 def MOVE(x,y,z):
-    print('nao esta movendo ainda')
+    Q1,Q2,Q3,Q4 = func_ic(x,y,z,-90) # all Qi joint variables in radians
+    print('q1 = ',Q1, '\nq2 = ',Q2,'\nq3 = ',Q3,'\nq4 = ',Q4)
 
 def REPOUSO():
     print('\n INDO PARA POSICAO DE REPOUSO... \n')
@@ -143,40 +148,13 @@ def REPOUSO():
     except:
         print('Problema no envio do comando\nAbortando o programa...')
 
-# This function is called every time a key is presssed
-def kbevent(event, params):
-    #if the ascii value matches o, open claw
-    if event.Ascii == 111:
-        ABRE_GARRA()
-    #if the ascii value matches i, close claw 
-    if event.Ascii == 105:
-        FECHA_GARRA()
-    # print key info
-    print(event)
-    # If the ascii value matches spacebar, terminate the while loop
-    if event.Ascii == 32:
-        params['running'] = False
+###############################
+######## NEW FUNCTIONS ########
+###############################
 
-parameters={'running':True}
-# Create hookmanager
-hookman = pyxhook.HookManager(parameters=True)
-# Define our callback to fire when a key is pressed down
-hookman.KeyDown = kbevent
-# Define our parameters for callback function
-hookman.KeyDownParameters = parameters
-# Hook the keyboard
-hookman.HookKeyboard()
-# Start our listener
-hookman.start()
+print('antes do move')
+MOVE(5,5,5)
 
-# Create a loop to keep the application running
-while parameters['running']:
-    time.sleep(0.1)
-# Close the listener when we are done
-hookman.cancel()
 
 print("FIM DO PROGRAMA")
-
-
-
 
