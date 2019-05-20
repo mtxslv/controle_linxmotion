@@ -100,18 +100,38 @@ else:
 ###############################
 
 #Inverse Cynematics function
-def func_ic(x,y,z,phi):
-    '''
-	   input: position and angle
-	   output: Tuple containing angular positions, in radians
-    '''
-    theta_1 = math.atan2(y,x) # relation just valid for math.sqrt(y*y+x*x) != 0
-    R1 = math.sqrt(math.pow(z-L4*math.sin(phi)-L1,2)+math.pow(x-L4*math.cos(phi),2))
-    cos_a1 = (L2*L2+R1*R1-L3*L3)/(2*L2*R1) # a1 = math.atan2( math.sqrt( 1-cos_a1*cos_a1) , cos_a1 )
-    theta_3 = math.pi/2 + math.atan2( math.sqrt( 1-cos_a1*cos_a1) , cos_a1 ) - math.atan2( math.sqrt(1- (L2*cos_a1/L3)*(L2*cos_a1/L3)) , L2*cos_a1/L3 ) 
-    theta_2 = math.atan2(z-L4*math.sin(phi)-L1,x-L4*math.cos(phi))-theta_3
-    theta_4 = phi-theta_2-theta_3
-    return theta_1,theta_2,theta_3,theta_4
+def inversa(x,y,z,phi):
+  '''
+  input: cartesian position in {0}, and angle (in degrees) with the horizontal plane (x0Oy0)
+  output: a tuple, containing joint angles (in degrees)
+  '''
+  phi = math.radians(phi) # The code needs a value in radians
+  
+  if (x*x+y*y) == 0:
+    theta_1 = math.nan
+  else:
+    theta_1 = math.atan2(y,x)
+    theta_1 = math.degrees(theta_1)
+  
+  '''
+  No plano definido por x1Oz1, a dimensão horizontal do triângulo é igual a
+   math.sqrt(x*x+y*y) - L4*math.cos(phi), e a dimensão vertical é dada por
+   z - L4*math.sin(phi) - L1
+  '''
+  R1 = math.sqrt ( math.pow(z-L4*math.sin(phi)-L1, 2) + math.pow(math.sqrt(x*x+y*y) - L4*math.cos(phi) , 2) )
+  cos_a1 =((L2*L2)+(R1*R1)-(L3*L3))/(2*L2*R1) #não esquecer parênteses no denominador
+  a1 = math.degrees(math.atan2(math.sqrt(1-cos_a1*cos_a1),cos_a1)) # alpha 1 in degrees
+  alpha = math.degrees( math.atan2( z - L4*math.sin(phi) - L1, math.sqrt(x*x+y*y) - L4*math.cos(phi) ) ) # alpha, in degrees.
+  
+  theta_2 = alpha - a1 # theta_2, in degrees
+  
+  theta_3 = 90 + a1 - math.degrees( math.acos( L2*math.sin( math.radians(a1) )/L3 ) ) # theta_3, in degrees
+  
+  phi = math.degrees( phi )
+  
+  theta_4 = phi - theta_2 - theta_3 # theta_4, in degrees
+
+  return theta_1,theta_2,theta_3,theta_4
 
 
 def show_clue():
