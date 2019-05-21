@@ -36,7 +36,7 @@ ELB_MAX = 2000
 #3. WRIST
 WRI_SERVO = 3
 #LIMITES
-WRI_MIN = 500
+WRI_MIN = 600
 WRI_MAX = 2500
 
 #4. GRIPPER
@@ -160,6 +160,49 @@ def MOVE(x,y,z):
     Q1,Q2,Q3,Q4 = inversa(x,y,z,0) # all Qi joint variables in degrees
     print('q1 = ',Q1, '\nq2 = ',Q2,'\nq3 = ',Q3,'\nq4 = ',Q4)
 
+    #pos is defined by a single pulse plus the initial position of each joint.
+
+    pos1=((Q1+90)/0.09)+500
+    pos2=((Q2+90)/0.09)+500
+    pos3=((Q3+90)/0.09)+500
+    pos4=((Q4+90)/0.09)+500
+
+    if ((pos1>=BAS_MIN)&(pos1<=BAS_MAX)):
+		try:
+      		  	pos = braco.trava(0,pos1) 
+		 	braco.envia_comando('#%dP%dT%d' % (0,pos1,500))
+        
+    		except:
+			print('Problema no envio do comando\nAbortando o programa...')
+
+
+    if ((pos2>=SHL_MIN)&(pos2<=SHL_MAX)):
+		try:
+      		  	pos = braco.trava(1,pos2) 
+		 	braco.envia_comando('#%dP%dT%d' % (1,pos2,500))
+        
+    		except:
+			print('Problema no envio do comando\nAbortando o programa...')
+
+    if ((pos3>=WRI_MIN)&(pos3<=WRI_MAX)):
+		try:
+      		  	pos = braco.trava(2,pos3) 
+		 	braco.envia_comando('#%dP%dT%d' % (2,pos3,500))
+        
+    		except:
+			print('Problema no envio do comando\nAbortando o programa...')
+
+    if ((pos4>=GRI_MIN)&(pos4<=GRI_MAX)):
+		try:
+      		  	pos = braco.trava(3,pos4) 
+		 	braco.envia_comando('#%dP%dT%d' % (3,pos4,500))
+        
+    		except:
+			print('Problema no envio do comando\nAbortando o programa...')
+
+
+
+
 def REPOUSO():
     print('\n INDO PARA POSICAO DE REPOUSO... \n')
     try:
@@ -173,7 +216,7 @@ def REPOUSO():
 ###############################
 
 print('antes do move')
-MOVE(244,0,153)
+MOVE(L3+L4,0,L1+L2)
 
 
 print("FIM DO PROGRAMA")
