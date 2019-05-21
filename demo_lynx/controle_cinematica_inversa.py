@@ -157,7 +157,7 @@ def FECHA_GARRA():
 	print('Problema no envio do comando\nAbortando o programa...')
 
 def MOVE(x,y,z):
-    Q1,Q2,Q3,Q4 = inversa(x,y,z,0) # all Qi joint variables in radians
+    Q1,Q2,Q3,Q4 = inversa(x,y,z,0) # all Qi joint variables in degrees
     print('q1 = ',Q1, '\nq2 = ',Q2,'\nq3 = ',Q3,'\nq4 = ',Q4)
 
 def REPOUSO():
@@ -173,7 +173,7 @@ def REPOUSO():
 ###############################
 
 print('antes do move')
-MOVE(0,87,28+45+145+186)
+MOVE(244,0,153)
 
 
 print("FIM DO PROGRAMA")
