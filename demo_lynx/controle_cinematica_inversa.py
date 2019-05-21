@@ -162,10 +162,10 @@ def MOVE(x,y,z):
 
     #pos is defined by a single pulse plus the initial position of each joint.
 
-    pos1=((Q1+90)/0.09)+500
-    pos2=((Q2+90)/0.09)+500
-    pos3=((Q3+90)/0.09)+500
-    pos4=((Q4+90)/0.09)+500
+    pos1=((Q1+90)/0.09)+1500
+    pos2=((Q2+90)/0.09)+1500
+    pos3=((Q3+90)/0.09)+1500
+    pos4=((Q4+90)/0.09)+1500
 
     if ((pos1>=BAS_MIN)&(pos1<=BAS_MAX)):
 		try:
