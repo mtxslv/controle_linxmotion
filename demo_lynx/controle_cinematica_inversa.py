@@ -133,6 +133,16 @@ def inversa(x,y,z,phi):
 
   return theta_1,theta_2,theta_3,theta_4
 
+def pulsos(th_1,th_2,th_3,th_4):
+  '''
+  input: joint angles, in degrees, calculated from inverse kinematics
+  output: pulse signal, to control linxmotion AL5D robotic arm.
+  '''
+  t_0 = (th_1 + 90)/0.09 + 500
+  t_1 = (th_2)/0.09 + 500
+  t_2 = (th_3 + 180)/0.09 + 500
+  t_3 = (th_4 + 99)/0.09 + 500
+  return t_0, t_1, t_2, t_3
 
 def show_clue():
     print('Waiting instructions...')
@@ -157,6 +167,8 @@ def FECHA_GARRA():
 	print('Problema no envio do comando\nAbortando o programa...')
 
 def MOVE(x,y,z):
+
+    '''
     Q1,Q2,Q3,Q4 = inversa(x,y,z,0) # all Qi joint variables in degrees
     print('q1 = ',Q1, '\nq2 = ',Q2,'\nq3 = ',Q3,'\nq4 = ',Q4)
 
@@ -199,8 +211,30 @@ def MOVE(x,y,z):
         
     		except:
 			print('Problema no envio do comando\nAbortando o programa...')
-
-
+    '''
+    #th1,th2,th3,th4 = inversa(x,y,z,0) descomentar depois
+    #t1,t2,t3,t4 = pulsos(th1,th2,th3,th4) descomentar depois
+    t1,t2,t3,t4 = pulsos(0,90,-90,-90) #linha teste, comentar depois
+    try:
+	pos = braco.trava(0,t1) 
+	braco.envia_comando('#%dP%dT%d' % (0,t1,500))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
+    try:
+	pos = braco.trava(0,t2) 
+	braco.envia_comando('#%dP%dT%d' % (0,t2,500))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
+    try:
+	pos = braco.trava(0,t3) 
+	braco.envia_comando('#%dP%dT%d' % (0,t3,500))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
+    try:
+	pos = braco.trava(0,t4) 
+	braco.envia_comando('#%dP%dT%d' % (0,t4,500))
+    except:
+	print('Problema no envio do comando\nAbortando o programa...')
 
 
 def REPOUSO():
@@ -216,7 +250,7 @@ def REPOUSO():
 ###############################
 
 print('antes do move')
-MOVE(L3+L4,0,L1+L2)
+MOVE(186,0,131)
 
 
 print("FIM DO PROGRAMA")
