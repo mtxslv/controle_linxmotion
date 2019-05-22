@@ -18,26 +18,26 @@ import math
 #0. BASE
 BAS_SERVO = 0
 #LIMITES
-BAS_MIN = 500
-BAS_MAX = 2400
+BAS_MIN = 950
+BAS_MAX = 1918
 
 #1. SHOULDER
 SHL_SERVO = 1
 #LIMITES
-SHL_MIN = 1200
-SHL_MAX = 2000
+SHL_MIN = 1192
+SHL_MAX = 1730
 
 #2. ELBOW
 ELB_SERVO = 2
 #LIMITES
-ELB_MIN = 1100
-ELB_MAX = 2000
+ELB_MIN = 1071
+ELB_MAX = 1874
 
 #3. WRIST
 WRI_SERVO = 3
 #LIMITES
-WRI_MIN = 500
-WRI_MAX = 2500
+WRI_MIN = 545
+WRI_MAX = 1766
 
 #4. GRIPPER
 GRI_SERVO = 4
@@ -156,7 +156,9 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#0P%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_3 = ",t_3)
 	func_cd(q1,q2,q3,q4)
+
  
     # If the ascii value matches d, MOVE THE wrist DOWN
     if event.Ascii == 100:
@@ -173,6 +175,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#3%sT1500' % (pos)))
 	except:
 		print('Problema no envwio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_3 = ",t_3)
 	func_cd(q1,q2,q3,q4)
 
      # If the ascii value matches w, move elbow up
@@ -190,6 +193,7 @@ def kbevent(event):
 	except:
 		#t_2 -= 500
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_2 = ",t_2)
 	func_cd(q1,q2,q3,q4)
 
      # If the ascii value matches s, move elbow down
@@ -209,6 +213,7 @@ def kbevent(event):
 	except:
 		#t_2 +=500
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_2 = ",t_2)
 	func_cd(q1,q2,q3,q4)
 
       # If the ascii value matches q, move shoulder up
@@ -221,6 +226,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_1 = ",t_1)
 	func_cd(q1,q2,q3,q4)
 
 
@@ -234,6 +240,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_1 = ",t_1)
 	func_cd(q1,q2,q3,q4)
 
         #if the ascii value matches o, open claw
@@ -245,6 +252,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_4 = ",t_4)
 	func_cd(q1,q2,q3,q4)
 
       #if the ascii value matches i , close claw
@@ -256,6 +264,7 @@ def kbevent(event):
 		print('Envio de comando com teste de envio e de travas: %s \n' % ('#1%sT1500' % (pos)))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_4 = ",t_4)
 	func_cd(q1,q2,q3,q4)
       
      #if the ascii value matches z, move body anti-clockwise
@@ -267,6 +276,7 @@ def kbevent(event):
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_0 = ",t_0)
 	func_cd(q1,q2,q3,q4)
 
      #if the ascii value c, move body clockwise
@@ -278,6 +288,7 @@ def kbevent(event):
 		braco.envia_comando('#%dP%dT%d' % (0,t_0,500))
 	except:
 		print('Problema no envio do comando\nAbortando o programa...')
+	print("Pulso enviado: t_0 = ",t_0)
 	func_cd(q1,q2,q3,q4)
 		
 
