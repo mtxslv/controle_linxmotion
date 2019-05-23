@@ -214,25 +214,25 @@ def MOVE(x,y,z):
     '''
     #th1,th2,th3,th4 = inversa(x,y,z,0) descomentar depois
     #t1,t2,t3,t4 = pulsos(th1,th2,th3,th4) descomentar depois
-    t1,t2,t3,t4 = pulsos(0,90,-90,-90) #linha teste, comentar depois
+    t0, t1,t2,t3 = pulsos(0,90,-90,-90) #linha teste, comentar depois
     try:
-	pos = braco.trava(0,t1) 
-	braco.envia_comando('#%dP%dT%d' % (0,t1,500))
+	pos = braco.trava(1,t1) 
+	braco.envia_comando('#%dP%dT%d' % (1,t1,500))
     except:
 	print('Problema no envio do comando\nAbortando o programa...')
     try:
-	pos = braco.trava(0,t2) 
-	braco.envia_comando('#%dP%dT%d' % (0,t2,500))
+	pos = braco.trava(2,t2) 
+	braco.envia_comando('#%dP%dT%d' % (2,t2,500))
     except:
 	print('Problema no envio do comando\nAbortando o programa...')
     try:
-	pos = braco.trava(0,t3) 
-	braco.envia_comando('#%dP%dT%d' % (0,t3,500))
+	pos = braco.trava(3,t3) 
+	braco.envia_comando('#%dP%dT%d' % (3,t3,500))
     except:
 	print('Problema no envio do comando\nAbortando o programa...')
     try:
-	pos = braco.trava(0,t4) 
-	braco.envia_comando('#%dP%dT%d' % (0,t4,500))
+	pos = braco.trava(0,t0) 
+	braco.envia_comando('#%dP%dT%d' % (0,t0,500))
     except:
 	print('Problema no envio do comando\nAbortando o programa...')
 
