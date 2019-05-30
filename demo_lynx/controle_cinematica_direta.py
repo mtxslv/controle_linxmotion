@@ -56,7 +56,7 @@ properties = [BAS_SERVO, BAS_MIN, BAS_MAX,
 L1 = 28+45
 L2 = 145
 L3 = 186
-L4 = 87
+L4 = 87+98 # 98 é o comprimento da caneta
 ##################################
 #posições iniciais
 t_0 = 1500
